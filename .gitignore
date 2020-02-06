@@ -1,2 +1,4 @@
 .idea/
 guess-number.iml
+target/
+.DS_Store
