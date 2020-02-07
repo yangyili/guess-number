@@ -6,12 +6,17 @@ public class GuessNumber {
     private int numberLen = 4;
     private String RESULT_TEMPLATE = "%sA%sB";
     private int guessCount;
-    public GuessNumber(AnswerGenerator answerGenerator) {
+    private InputNumberValidator inputNumberValidator;
+
+    public GuessNumber(AnswerGenerator answerGenerator, InputNumberValidator inputNumberValidator) {
         this.answer = answerGenerator.generate();
         this.guessCount = 0;
+        this.inputNumberValidator = inputNumberValidator;
     }
 
     public String guess(String number) {
+        boolean isNumberValid = this.inputNumberValidator.isValid(number);
+        if (!isNumberValid) return "Wrong Input, input again";
         this.guessCount++;
         if (this.guessCount > this.guessMaxCount) {
             System.out.println("Game Over");

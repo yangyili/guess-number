@@ -8,51 +8,53 @@ import org.mockito.Mockito;
 public class GuessNumberTest {
 
     RandomAnswerGenerator randomAnswerGenerator;
+    GuessNumberValidator guessNumberValidator;
 
     @Before
     public void init() {
         randomAnswerGenerator = Mockito.mock(RandomAnswerGenerator.class);
         Mockito.when(randomAnswerGenerator.generate()).thenReturn("1234");
+        guessNumberValidator = new GuessNumberValidator();
     }
 
     @Test
     public void should_return_4A0B_when_correct_number_is_1234_given_1234() {
-        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator, guessNumberValidator);
         String result = guessNumber.guess("1234");
         Assert.assertEquals("4A0B", result);
     }
 
     @Test
     public void should_return_2A2B_when_correct_number_is_1234_given_1243() {
-        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator, guessNumberValidator);
         String result = guessNumber.guess("1243");
         Assert.assertEquals("2A2B", result);
     }
 
     @Test
     public void should_return_0A0B_when_correct_number_is_1234_given_5678() {
-        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator, guessNumberValidator);
         String result = guessNumber.guess("5678");
         Assert.assertEquals("0A0B", result);
     }
 
     @Test
     public void should_return_0A4B_when_correct_number_is_1234_given_4321() {
-        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator, guessNumberValidator);
         String result = guessNumber.guess("4321");
         Assert.assertEquals("0A4B", result);
     }
 
     @Test
     public void should_return_1A1B_when_correct_number_is_1529_given_() {
-        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator, guessNumberValidator);
         String result = guessNumber.guess("1529");
         Assert.assertEquals("1A1B", result);
     }
 
     @Test
     public void should_return_game_over_when_guess_wrong_more_than_6_time() {
-        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator, guessNumberValidator);
         String first_guess_result = guessNumber.guess("1345");
         String second_guess_result = guessNumber.guess("4567");
         String third_guess_result = guessNumber.guess("9854");
@@ -71,16 +73,16 @@ public class GuessNumberTest {
 
     @Test
     public void should_return_wrong_input_when_input_repeat_digits_string() {
-        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator, guessNumberValidator);
         String guess_result = guessNumber.guess("1134");
         Assert.assertEquals("Wrong Input, input again", guess_result);
     }
 
     @Test
     public void should_return_wrong_input_when_input_not_4_digits_string() {
-        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator, guessNumberValidator);
         String guess_result_with_less_than_4_nums = guessNumber.guess("12");
-        String guess_result_with_more_than_4_nums = guessNumber.guess("1235");
+        String guess_result_with_more_than_4_nums = guessNumber.guess("12345");
         Assert.assertEquals("Wrong Input, input again", guess_result_with_less_than_4_nums);
         Assert.assertEquals("Wrong Input, input again", guess_result_with_more_than_4_nums);
     }
