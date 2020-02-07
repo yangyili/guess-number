@@ -3,7 +3,7 @@ package com.tw;
 public class GuessNumber {
     private final int guessMaxCount = 6;
     private String answer;
-    private int numberLen = 4;
+    private int numberLen = 4; // todo how to use inputNumberValidator variable?
     private String RESULT_TEMPLATE = "%sA%sB";
     private int guessCount;
     private InputNumberValidator inputNumberValidator;
