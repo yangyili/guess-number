@@ -68,4 +68,20 @@ public class GuessNumberTest {
         Assert.assertEquals("0A0B", sixth_guess_result);
         Assert.assertEquals("", seventh_guess_result);
     }
+
+    @Test
+    public void should_return_wrong_input_when_input_repeat_digits_string() {
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        String guess_result = guessNumber.guess("1134");
+        Assert.assertEquals("Wrong Input, input again", guess_result);
+    }
+
+    @Test
+    public void should_return_wrong_input_when_input_not_4_digits_string() {
+        GuessNumber guessNumber = new GuessNumber(randomAnswerGenerator);
+        String guess_result_with_less_than_4_nums = guessNumber.guess("12");
+        String guess_result_with_more_than_4_nums = guessNumber.guess("1235");
+        Assert.assertEquals("Wrong Input, input again", guess_result_with_less_than_4_nums);
+        Assert.assertEquals("Wrong Input, input again", guess_result_with_more_than_4_nums);
+    }
 }
