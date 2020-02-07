@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.apache.commons.lang3.StringUtils;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
