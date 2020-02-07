@@ -3,14 +3,18 @@ package com.tw;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class GuessNumberTest {
 
     GuessNumber guessNumber;
+    RandomAnswerGenerator randomAnswerGenerator;
 
     @Before
     public void init() {
-        guessNumber = new GuessNumber("1234");
+        randomAnswerGenerator = Mockito.mock(RandomAnswerGenerator.class);
+        Mockito.when(randomAnswerGenerator.generate()).thenReturn("1234");
+        guessNumber = new GuessNumber(randomAnswerGenerator);
     }
 
     @Test

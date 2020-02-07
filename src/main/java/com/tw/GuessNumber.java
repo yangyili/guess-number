@@ -3,10 +3,10 @@ package com.tw;
 public class GuessNumber {
     private String answer;
     private int numberLen = 4;
-    private String resultTemp = "%sA%sB";
+    private String RESULT_TEMPLATE = "%sA%sB";
 
-    public GuessNumber(String answer) {
-        this.answer = answer;
+    public GuessNumber(AnswerGenerator answerGenerator) {
+        this.answer = answerGenerator.generate();
     }
 
     public String guess(String number) {
@@ -16,6 +16,6 @@ public class GuessNumber {
             if (number.charAt(i) == this.answer.charAt(i)) ACount++;
             if (number.charAt(i) != this.answer.charAt(i) && this.answer.indexOf(number.charAt(i)) != -1) BCount++;
         }
-        return String.format(this.resultTemp, ACount, BCount);
+        return String.format(this.RESULT_TEMPLATE, ACount, BCount);
     }
 }
