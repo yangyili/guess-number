@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class RandomAnswerGenerator implements AnswerGenerator {
+    @Override
     public String generate() {
         Set answer = new HashSet<String>();
         Random random = new Random();
